@@ -7,9 +7,9 @@ define(function () {
     this.numChars = this.defaultChars.length;
   };
 
-  var i = AsciiGenerator.prototype;
+  var a = AsciiGenerator.prototype;
 
-  i.generateAscii = function (image) {
+  a.generateAscii = function (image) {
     var w = 50,
       h = Math.floor(image.height * (50 / image.width) / 2),
       imgData;
@@ -20,7 +20,7 @@ define(function () {
     return this.rgbaToBw(imgData, w, h);
   }
 
-  i.rgbaToBw = function (imgData, w, h) {
+  a.rgbaToBw = function (imgData, w, h) {
     var i = 0,
       string = '';
 
@@ -37,7 +37,7 @@ define(function () {
 
         string += this.defaultChars[Math.floor(val * (this.numChars - 1))];
       }
-      string += '\n'
+      string += '\n';
     }
 
     return string;
