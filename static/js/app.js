@@ -36,10 +36,12 @@ define([
 
   a.onFileDropDragEnter = function (e) {
     this.cancel(e);
+    this.$fileDrop.addClass('hover');
   }
 
   a.onFileDropDragLeave = function (e) {
     this.cancel(e);
+    this.$fileDrop.removeClass('hover');
   }
 
   a.onFileDropDragOver = function (e) {
@@ -53,19 +55,42 @@ define([
       image = new Image();
     
     self.cancel(e);
+    self.$image.css({
+      'opacity': 0
+    });
     
     image.onload = function () {
       var string = self.asciiGenerator.generateAscii(image),
+        stringArray = string.split(''),
+        outputString = '',
+        i = 0,
         h = string.match(/\n/g).length * 24;
-      self.$output.html(string);
+
       self.$output.css({
         height: h + 'px'
       });
+      self.$image.animate({
+        'opacity': 1
+      });
+
+      function addToString() {
+        outputString += stringArray[i];
+        outputString += stringArray[i + 1];
+        outputString += stringArray[i + 2];
+        self.$output.text(outputString);
+        if (i < stringArray.length - 3) {
+          i += 3;
+          setTimeout(addToString, 1);
+        }
+      }
+
+      addToString();
     }
 
     image.src = src;
 
     self.$image.attr('src', src);
+    this.$fileDrop.removeClass('hover');
   }
 
   a.cancel = function (e) {

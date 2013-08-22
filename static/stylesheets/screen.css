@@ -1,17 +1,25 @@
 * {
   box-sizing: border-box; }
 
+.navbar-title {
+  margin-top: 20px; }
+
 #file-drop {
   width: 100%;
   text-align: center;
   color: #999;
-  padding: 10px;
+  padding: 30px 10px;
   border: 1px dashed #333;
   border-radius: 3px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
-  background: #eee; }
+  background: #eee;
+  transition: all 0.2s linear; }
+
+#file-drop.hover {
+  background-color: #ccc; }
 
 #output {
   width: 100%;
+  min-height: 82px;
   font-family: 'Courier New'; }
