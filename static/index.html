@@ -1,8 +1,24 @@
 <html>
 <head>
   <title>Ascii Maker</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-responsive.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css">
+  <script type="text/javascript" src="/js/components/requirejs/require.js" data-main="/js/main"></script>
 </head>
 <body>
   <h1>Ascii Maker</h1>
+  <div id="app">
+    <form>
+      <fieldset>
+        <legend>Upload Image</legend>
+        <label>Image</label>
+        <input type="file" id="fileselect" name="fileselect" />
+        <div id="filedrag">or drop file here</div>
+        <button type="submit" class="btn btn-primary">Upload <i class="icon-upload icon-white"></i></button>
+      </fieldset>
+    </form>
+
+  </div>
 </body>
 </html>
