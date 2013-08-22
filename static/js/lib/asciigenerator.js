@@ -5,8 +5,6 @@ define([
   function AsciiGenerator() {
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.defaultChars = '$&%#+=-. '.split('');
-    this.numChars = this.defaultChars.length;
   };
 
   var a = AsciiGenerator.prototype;
@@ -24,6 +22,7 @@ define([
 
   a.rgbaToBw = function (imgData, w, h) {
     var i = 0,
+      chars = Settings.characterPalette.split(''),
       string = '';
 
     for (i; i < h; i += 1) {
@@ -37,7 +36,7 @@ define([
           a = imgData[index + 3],
           val = (((r * 77) + (b * 28) + (g * 151)) / 65280);
 
-        string += this.defaultChars[Math.floor(val * (this.numChars - 1))];
+        string += chars[Math.floor(val * (chars.length - 1))];
       }
       string += '\n';
     }
