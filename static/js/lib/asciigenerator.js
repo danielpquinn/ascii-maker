@@ -11,15 +11,9 @@ define([
 
   var a = AsciiGenerator.prototype;
 
-<<<<<<< HEAD
   i.generateAscii = function (image) {
     var w = Settings.textCols,
       h = Math.floor(image.height * (Settings.textCols / image.width) / 2),
-=======
-  a.generateAscii = function (image) {
-    var w = 50,
-      h = Math.floor(image.height * (50 / image.width) / 2),
->>>>>>> 24d6f5bcee611a599bd7c3de1a5564c486e8215d
       imgData;
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
