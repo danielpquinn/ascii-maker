@@ -1,4 +1,6 @@
-define(function () {
+define([
+  'settings'
+], function (Settings) {
 
   function AsciiGenerator() {
     this.canvas = document.createElement('canvas');
@@ -10,8 +12,8 @@ define(function () {
   var i = AsciiGenerator.prototype;
 
   i.generateAscii = function (image) {
-    var w = 50,
-      h = Math.floor(image.height * (50 / image.width) / 2),
+    var w = Settings.textCols,
+      h = Math.floor(image.height * (Settings.textCols / image.width) / 2),
       imgData;
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

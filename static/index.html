@@ -25,13 +25,18 @@
           <div class="control-group" id="message-container">
             <span class="help-inline" id="message"></span>
           </div>
-        </fieldset>
-      </form>
+          <label for="text-cols"></label>
       <img id="image" src=""/>
     </div>
     
     <div class="span8">
       <textarea id="output" cols="30"></textarea>
+      <form>
+        <fieldset>
+          <label for="text-cols">width (in columns of text)</label>
+          20 <input name="text-cols" id="text-cols" type="range" min="20" max="60"> 60
+        </fieldset>
+      </form>
     </div>
 
   </div>

@@ -1,7 +1,8 @@
 define([
   'jquery',
-  'lib/asciigenerator'
-], function ($, AsciiGenerator) {
+  'lib/asciigenerator',
+  'settings'
+], function ($, AsciiGenerator, Settings) {
 
   function App() {};
 
@@ -20,6 +21,7 @@ define([
     this.$message = $e.find('#message');
     this.$image = $e.find('#image');
     this.$output = $e.find('#output');
+    this.$textColsInput = $e.find('#text-cols').val(Settings.textCols);
     this.asciiGenerator = new AsciiGenerator();
   }
 
@@ -32,6 +34,11 @@ define([
     this.$fileDrop.on('drop', function () { self.cancel.apply(self, arguments); });
     this.$fileDrop.on('drop', function () { self.onFileDropDrop.apply(self, arguments); });
     this.$fileDrop.on('dragend', function () { self.cancel.apply(self, arguments); });
+    this.$textColsInput.on('change', function () { self.onTextColsInputChange.apply(self, arguments); });
+  }
+
+  a.onTextColsInputChange = function (e) {
+    Settings.textCols = e.target.value;
   }
 
   a.onFileDropDragEnter = function (e) {
