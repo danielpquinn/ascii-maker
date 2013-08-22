@@ -11,7 +11,7 @@ define([
 
   var a = AsciiGenerator.prototype;
 
-  i.generateAscii = function (image) {
+  a.generateAscii = function (image) {
     var w = Settings.textCols,
       h = Math.floor(image.height * (Settings.textCols / image.width) / 2),
       imgData;
