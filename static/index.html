@@ -12,12 +12,15 @@
     <form>
       <fieldset>
         <legend>Upload Image</legend>
-        <label>Image</label>
-        <input type="file" id="fileselect" name="fileselect" />
-        <div id="filedrag">or drop file here</div>
-        <button type="submit" class="btn btn-primary">Upload <i class="icon-upload icon-white"></i></button>
+        <div id="file-drop">drop file here</div>
+        <div class="control-group" id="message-container">
+          <span class="help-inline" id="message"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Ascii It. <i class="icon-upload icon-white"></i></button>
       </fieldset>
     </form>
+
+    <img id="image" src=""/>
 
   </div>
 </body>

@@ -1,6 +1,7 @@
 define([
-  'jquery'
-], function ($) {
+  'jquery',
+  'lib/asciigenerator'
+], function ($, AsciiGenerator) {
 
   function App() {};
 
@@ -10,17 +11,68 @@ define([
     console.log(this);
     this.setup();
     this.bindEvents();
+    this.showMessage('Upload an image', 'info');
   }
 
   a.setup = function () {
     var $e = this.$el = $('#app');
-    this.$drop = $e.find('.drop');
+    this.$fileDrop = $e.find('#file-drop');
+    this.$messageContainer = $e.find('#message-container');
+    this.$message = $e.find('#message');
+    this.$image = $e.find('#image');
+    this.asciiGenerator = new AsciiGenerator();
   }
 
   a.bindEvents = function () {
-    this.$drop.on('ondragenter', function (e) {
-      console.log(e);
-    });
+    var self = this;
+
+    this.$fileDrop.on('dragenter', function () { self.onFileDropDragEnter.apply(self, arguments); });
+    this.$fileDrop.on('dragleave', function () { self.onFileDropDragLeave.apply(self, arguments); });
+    this.$fileDrop.on('dragover', function () { self.onFileDropDragOver.apply(self, arguments); });
+    this.$fileDrop.on('drop', function () { self.cancel.apply(self, arguments); });
+    this.$fileDrop.on('drop', function () { self.onFileDropDrop.apply(self, arguments); });
+    this.$fileDrop.on('dragend', function () { self.cancel.apply(self, arguments); });
+  }
+
+  a.onFileDropDragEnter = function (e) {
+    this.cancel(e);
+  }
+
+  a.onFileDropDragLeave = function (e) {
+    this.cancel(e);
+  }
+
+  a.onFileDropDragOver = function (e) {
+    this.cancel(e);
+  }
+
+  a.onFileDropDrop = function (e) {
+    var self = this,
+      file = e.originalEvent.dataTransfer.files[0],
+      src = URL.createObjectURL(file),
+      image = new Image();
+    
+    self.cancel(e);
+
+    image.src = src;
+    image.onload = function () {
+      self.asciiGenerator.generateAscii(image);
+    }
+
+    self.$image.attr('src', src);
+  }
+
+  a.cancel = function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    return false;
+  }
+
+  a.showMessage = function (message, type) {
+    var type = type || 'info';
+    this.$messageContainer.removeClass();
+    this.$messageContainer.addClass('control-group ' + type);
+    this.$message.html(message);
   }
 
   return App;
