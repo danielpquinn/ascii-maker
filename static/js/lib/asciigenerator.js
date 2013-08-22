@@ -10,13 +10,13 @@ define(function () {
   var i = AsciiGenerator.prototype;
 
   i.generateAscii = function (image) {
-    var w = 40,
-      h = image.height * (40 / image.width) / 2,
+    var w = 50,
+      h = Math.floor(image.height * (50 / image.width) / 2),
       imgData;
 
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.drawImage(image, 0, 0, w, h);
     imgData = this.ctx.getImageData(0, 0, w, h).data;
-    console.log(imgData);
     return this.rgbaToBw(imgData, w, h);
   }
 
