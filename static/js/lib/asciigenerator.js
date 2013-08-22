@@ -9,11 +9,17 @@ define([
     this.numChars = this.defaultChars.length;
   };
 
-  var i = AsciiGenerator.prototype;
+  var a = AsciiGenerator.prototype;
 
+<<<<<<< HEAD
   i.generateAscii = function (image) {
     var w = Settings.textCols,
       h = Math.floor(image.height * (Settings.textCols / image.width) / 2),
+=======
+  a.generateAscii = function (image) {
+    var w = 50,
+      h = Math.floor(image.height * (50 / image.width) / 2),
+>>>>>>> 24d6f5bcee611a599bd7c3de1a5564c486e8215d
       imgData;
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -22,7 +28,7 @@ define([
     return this.rgbaToBw(imgData, w, h);
   }
 
-  i.rgbaToBw = function (imgData, w, h) {
+  a.rgbaToBw = function (imgData, w, h) {
     var i = 0,
       string = '';
 
@@ -39,7 +45,7 @@ define([
 
         string += this.defaultChars[Math.floor(val * (this.numChars - 1))];
       }
-      string += '\n'
+      string += '\n';
     }
 
     return string;
