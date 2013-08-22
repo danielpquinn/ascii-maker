@@ -6,21 +6,25 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css">
   <script type="text/javascript" src="/js/components/requirejs/require.js" data-main="/js/main"></script>
 </head>
-<body>
+<body class="container">
   <h1>Ascii Maker</h1>
-  <div id="app">
-    <form>
-      <fieldset>
-        <legend>Upload Image</legend>
-        <div id="file-drop">drop file here</div>
-        <div class="control-group" id="message-container">
-          <span class="help-inline" id="message"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Ascii It. <i class="icon-upload icon-white"></i></button>
-      </fieldset>
-    </form>
+  <div id="app" class="row">
 
-    <img id="image" src=""/>
+    <div class="span4">
+      <form>
+        <fieldset>
+          <div id="file-drop">drop file here</div>
+          <div class="control-group" id="message-container">
+            <span class="help-inline" id="message"></span>
+          </div>
+        </fieldset>
+      </form>
+      <img id="image" src=""/>
+    </div>
+    
+    <div class="span8">
+      <textarea id="output" cols="30"></textarea>
+    </div>
 
   </div>
 </body>

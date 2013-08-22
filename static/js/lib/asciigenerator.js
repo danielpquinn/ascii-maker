@@ -1,17 +1,46 @@
 define(function () {
 
-  function AsciiGenerator() {};
+  function AsciiGenerator() {
+    this.canvas = document.createElement('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.defaultChars = '$&%#+=-. '.split('');
+    this.numChars = this.defaultChars.length;
+  };
 
   var i = AsciiGenerator.prototype;
 
-  i.init = function () {
-    this.canvas = document.createElement('canvas');
+  i.generateAscii = function (image) {
+    var w = 40,
+      h = image.height * (40 / image.width) / 2,
+      imgData;
+
+    this.ctx.drawImage(image, 0, 0, w, h);
+    imgData = this.ctx.getImageData(0, 0, w, h).data;
+    console.log(imgData);
+    return this.rgbaToBw(imgData, w, h);
   }
 
-  i.generateAscii = function (image) {
-    console.log(image);
-    var asciiString = 'some stuff';
-    return asciiString;
+  i.rgbaToBw = function (imgData, w, h) {
+    var i = 0,
+      string = '';
+
+    for (i; i < h; i += 1) {
+      var n = 0;
+
+      for (n; n < w; n += 1) {
+        var index = (n * 4) + (i * (w * 4)),
+          r = imgData[index],
+          b = imgData[index + 1],
+          g = imgData[index + 2],
+          a = imgData[index + 3],
+          val = (((r * 77) + (b * 28) + (g * 151)) / 65280);
+
+        string += this.defaultChars[Math.floor(val * (this.numChars - 1))];
+      }
+      string += '\n'
+    }
+
+    return string;
   }
 
   return AsciiGenerator;

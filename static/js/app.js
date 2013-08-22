@@ -11,7 +11,6 @@ define([
     console.log(this);
     this.setup();
     this.bindEvents();
-    this.showMessage('Upload an image', 'info');
   }
 
   a.setup = function () {
@@ -20,6 +19,7 @@ define([
     this.$messageContainer = $e.find('#message-container');
     this.$message = $e.find('#message');
     this.$image = $e.find('#image');
+    this.$output = $e.find('#output');
     this.asciiGenerator = new AsciiGenerator();
   }
 
@@ -53,11 +53,17 @@ define([
       image = new Image();
     
     self.cancel(e);
+    
+    image.onload = function () {
+      var string = self.asciiGenerator.generateAscii(image),
+        h = string.match(/\n/g).length * 24;
+      self.$output.html(string);
+      self.$output.css({
+        height: h + 'px'
+      });
+    }
 
     image.src = src;
-    image.onload = function () {
-      self.asciiGenerator.generateAscii(image);
-    }
 
     self.$image.attr('src', src);
   }
