@@ -1,0 +1,21 @@
+{
+  "name": "ascii-maker",
+  "version": "0.0.0",
+  "description": "A node.js website that creates ascii art using canvas.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danielpquinn/ascii-maker.git"
+  },
+  "author": "Dan Quinn",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/danielpquinn/ascii-maker/issues"
+  },
+  "dependencies": {
+    "express": "~3.3.5"
+  }
+}
