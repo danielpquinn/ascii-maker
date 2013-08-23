@@ -1,10 +1,4 @@
-define(function () {
-
-  var Settings = {
-    textCols: 30,
-    characterPalette: '†+-  '
-  }
-
-  return Settings
-
+define({
+  textCols: 30,
+  characterPalette: '†+-  '
 });
