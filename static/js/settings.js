@@ -2,7 +2,7 @@ define(function () {
 
   var Settings = {
     textCols: 30,
-    characterPalette: '$&%#+=-. '
+    characterPalette: '†+-  '
   }
 
   return Settings
