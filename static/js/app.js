@@ -1,7 +1,8 @@
 define([
   'jquery',
   'lib/asciigenerator',
-  'settings'
+  'settings',
+  'lib/jquery.form'
 ], function ($, AsciiGenerator, Settings) {
 
   function App() {};
@@ -17,6 +18,7 @@ define([
   a.setup = function () {
     var $e = this.$el = $('#app');
     this.$fileDrop = $e.find('#file-drop');
+    this.$imageUploadForm = $e.find('#image-upload');
     this.$messageContainer = $e.find('#message-container');
     this.$message = $e.find('#message');
     this.$image = $e.find('#image');
@@ -37,6 +39,7 @@ define([
     this.$fileDrop.on('dragend', function () { self.cancel.apply(self, arguments); });
     this.$textColsInput.on('change', function () { self.onTextColsInputChange.apply(self, arguments); });
     this.$characterPaletteInput.on('keyup', function () { self.onCharacterPaletteInputChange.apply(self, arguments); });
+    this.$imageUploadForm.on('submit', function () { self.onImageUploadFormSubmit.apply(self, arguments); });
   }
 
   a.onTextColsInputChange = function (e) {
@@ -64,27 +67,55 @@ define([
   }
 
   a.onFileDropDrop = function (e) {
-    var self = this,
-      file = e.originalEvent.dataTransfer.files[0],
-      src = URL.createObjectURL(file),
-      image = new Image();
+    var file = e.originalEvent.dataTransfer.files[0],
+      src = URL.createObjectURL(file);
     
+    this.cancel(e);
+
+    this.setImage(src);
+  }
+
+  a.onImageUploadFormSubmit = function (e) {
+    var self = this;
+    console.log('submitting');
+
+    self.$imageUploadForm.ajaxSubmit({
+      error: function (xhr) {
+        console.log('error: ' + xhr.status);
+      },
+      success: function (res) {
+        console.log('success');
+        self.setImage(res['image-file'].path.replace('static/', ''));
+      }
+    });
+
     self.cancel(e);
+  }
+
+  a.setImage = function (src) {
+    var self = this,
+      image = new Image();
+
     self.$image.css({
       'opacity': 0
     });
     
     image.onload = function () {
+      self.resetMessage();
+      self.$image.attr('src', src);
+      self.$image.animate({
+        'opacity': 1
+      });
       self.image = image;
       self.updateOutput();
     }
 
+    image.onerror = function (error) {
+      console.log(arguments);
+    }
+
     image.src = src;
 
-    self.$image.attr('src', src);
-    self.$image.animate({
-      'opacity': 1
-    });
     this.$fileDrop.removeClass('hover');
   }
 
@@ -112,6 +143,11 @@ define([
     this.$messageContainer.removeClass();
     this.$messageContainer.addClass('control-group ' + type);
     this.$message.html(message);
+  }
+
+  a.resetMessage = function () {
+    this.$messageContainer.removeClass();
+    this.$message.html(''); 
   }
 
   return App;

@@ -14,6 +14,8 @@ define([
       h = Math.floor(image.height * (Settings.textCols / image.width) / 2),
       imgData;
 
+    image.crossOrigin = '';
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.drawImage(image, 0, 0, w, h);
     imgData = this.ctx.getImageData(0, 0, w, h).data;

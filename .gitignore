@@ -10,4 +10,5 @@ Thumbs.db
 
 node_modules
 static/js/components
+static/uploads/*
 .sass-cache

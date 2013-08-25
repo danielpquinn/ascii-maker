@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Ascii Maker</title>
@@ -19,14 +20,17 @@
   <div id="app" class="row">
   
     <div class="span4">
-      <form>
+      <div id="file-drop">drop your image here</div>
+      <form action="/api/image-to-data-uri" method="post" enctype="multipart/form-data" id="image-upload">
         <fieldset>
-          <div id="file-drop">drop your image here</div>
-          <div class="control-group" id="message-container">
-            <span class="help-inline" id="message"></span>
-          </div>
-          <label for="text-cols"></label>
-      <img id="image" src=""/>
+          <input type="file" name="image-file" id="image-file" />
+        </fieldset>
+        <button class="btn" type="submit">upload image</button>
+      </form>
+      <div class="control-group" id="message-container">
+        <span class="help-inline" id="message"></span>
+      </div>
+      <img id="image" src="" />
     </div>
     
     <div class="span8">

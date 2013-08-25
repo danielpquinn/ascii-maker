@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 .navbar-title {
   margin-top: 20px;
 }
@@ -17,6 +13,7 @@
   margin-bottom: 10px;
   background: #eee;
   transition: all 0.2s linear;
+  box-sizing: border-box;
 }
 
 #file-drop.hover {
@@ -27,4 +24,8 @@
   width: 100%;
   min-height: 82px;
   font-family: 'Courier New';
+}
+
+#url {
+  width: 69%;
 }
