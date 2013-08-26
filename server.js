@@ -11,7 +11,7 @@ app.get('/', function (req, res) {
   fs.createReadStream('./static/index.html');
 });
 
-app.post('/api/image-to-data-uri', function (req, res) {
+app.post('/api/upload', function (req, res) {
   console.log(req);
   res.send(req.files);
 });

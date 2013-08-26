@@ -1,6 +1,9 @@
 .navbar-title {
   margin-top: 20px; }
 
+#image {
+  max-width: 100%; }
+
 #file-drop {
   width: 100%;
   text-align: center;

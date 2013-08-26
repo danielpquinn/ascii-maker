@@ -2,6 +2,12 @@ define([
   'settings'
 ], function (Settings) {
 
+  /**
+   * Creates ascii art string from native JavaSript Image object
+   * @class AsciiGenerator
+   * @name AsciiGenerator
+   * @constructor
+   */
   function AsciiGenerator() {
     this.canvas = document.createElement('canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -9,6 +15,13 @@ define([
 
   var a = AsciiGenerator.prototype;
 
+  /**
+   * Generates ascii string from image by drawing the image to a canvas and
+   * then extracting image data and passing it to rgbaToBw
+   * @memberOf AsciiGenerator
+   * @param  {Image} image Native JavaScript image to be converted to ascii
+   * @return {undefined}
+   */
   a.generateAscii = function (image) {
     var w = Settings.textCols,
       h = Math.floor(image.height * (Settings.textCols / image.width) / 2),
@@ -22,6 +35,13 @@ define([
     return this.rgbaToBw(imgData, w, h);
   }
 
+  /**
+   * Takes image data object, width and height, converts data to a string of characters
+   * based on global Settings.characterPallet string
+   * @memberOf AsciiGenerator
+   * @param  {Array} image Native JavaScript image to be converted to ascii
+   * @return {String}
+   */
   a.rgbaToBw = function (imgData, w, h) {
     var i = 0,
       chars = Settings.characterPalette.split(''),
