@@ -3,8 +3,8 @@ var fs = require('fs'),
   app = express(),
   server = require('http').createServer(app);
 
-app.use(express.bodyParser({ keepExtensions: true, uploadDir: "static/uploads" })); 
-
+app.use(express.favicon('static/favicon.ico'));
+app.use(express.bodyParser({ keepExtensions: true, uploadDir: "static/uploads" }));
 app.use(express.static(__dirname + '/static'));
 
 app.get('/', function (req, res) {
